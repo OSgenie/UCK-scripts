@@ -58,7 +58,7 @@ do
     echo "+-------------------------------------------------------------------+"    
     set_parameters
 # for testing purposes, this prevents a previously modified isos from being modified again
-if [ ! -d $remasterdir ]; then
+#if [ ! -d $remasterdir ]; then
     set_iso_arch
     unpack_iso
     if [ -e $remasterdir/remaster-iso/casper/vmlinuz ];then
@@ -68,7 +68,7 @@ if [ ! -d $remasterdir ]; then
     modify_iso
     pack_iso
     fi
-fi
+#fi
 done
 }
 
