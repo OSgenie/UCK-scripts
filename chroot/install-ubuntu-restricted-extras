@@ -16,6 +16,7 @@ apt-get install -qq debconf-utils cabextract libnspr4-0d
 cat > .wgetrc << EOM
 http_proxy = http://192.168.11.3:3128/
 EOM
+echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections
 apt-get install -y ttf-mscorefonts-installer
 rm .wgetrc
 apt-get install -qq ubuntu-restricted-extras
