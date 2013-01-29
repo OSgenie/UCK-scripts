@@ -13,7 +13,7 @@ fi
 done
 apt-get update
 apt-get install -qq debconf-utils cabextract libnspr4-0d
-cat > .wgetrc << http_proxy = http://192.168.11.3:3128/
+cat > .wgetrc << "http_proxy = http://192.168.11.3:3128/"
 apt-get install -qq ttf-mscorefonts-installer
 rm .wgetrc
 apt-get install -qq ubuntu-restricted-extras
