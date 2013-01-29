@@ -3,10 +3,10 @@
 # kirtley@osgenie.com
 echo "Apt-get Update"
 export http_proxy=http://192.168.11.6:3142
-apt-get update -q
+apt-get update -qq
 echo "Apt-get upgrade"
-apt-get upgrade -yq
-apt-get autoremove -yq
+apt-get upgrade -qq
+apt-get autoremove -qq
 apt-get install -fy
 echo "Running Configurations"
 ./chroot/install-ubuntu-restricted-extras

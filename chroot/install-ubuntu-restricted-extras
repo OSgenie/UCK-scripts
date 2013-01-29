@@ -5,18 +5,18 @@ echo "Start Install ubuntu restricted extras"
 release=$(lsb_release -cs)
 for repository in universe multiverse
 do
-deb_entry="deb http://archive.ubuntu.com/ubuntu/ $release $repository"
+deb_entry="$release $repository"
 grep_deb=$(grep "$deb_entry" /etc/apt/sources.list)
 if [  "$grep_deb" != "$deb_entry" ]; then
-echo $deb_entry >> /etc/apt/sources.list
+echo "deb http://archive.ubuntu.com/ubuntu/" $deb_entry >> /etc/apt/sources.list
 fi
 done
 apt-get update
-apt-get install -y debconf-utils cabextract libnspr4-0d
-apt-get install -yd ttf-mscorefonts-installer
+apt-get install -qq debconf-utils cabextract libnspr4-0d
+apt-get install -qqd ttf-mscorefonts-installer
 echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections
 echo ttf-mscorefonts-installer msttcorefonts/dldir string /chroot/mscorefonts | debconf-set-selections
-apt-get install -y ttf-mscorefonts-installer --no-download
-apt-get install -yq ubuntu-restricted-extras
+apt-get install -qq ttf-mscorefonts-installer --no-download
+apt-get install -qq ubuntu-restricted-extras
 echo ttf-mscorefonts-installer msttcorefonts/dldir string | debconf-set-selections
 echo "Finish Install ubuntu restricted extras"
