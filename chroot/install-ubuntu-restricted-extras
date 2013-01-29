@@ -13,8 +13,10 @@ fi
 done
 apt-get update
 apt-get install -qq debconf-utils cabextract libnspr4-0d
-cat > .wgetrc << "http_proxy = http://192.168.11.3:3128/"
-apt-get install -qq ttf-mscorefonts-installer
+cat > .wgetrc << EOM
+http_proxy = http://192.168.11.3:3128/
+EOM
+apt-get install -y ttf-mscorefonts-installer
 rm .wgetrc
 apt-get install -qq ubuntu-restricted-extras
 echo ttf-mscorefonts-installer msttcorefonts/dldir string | debconf-set-selections
