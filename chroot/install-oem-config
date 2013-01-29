@@ -1,0 +1,6 @@
+#!/bin/bash
+# Kirtley Wienbroer
+# kirtley@osgenie.com
+echo "Start Install OEM-config"
+apt-get install -y oem-config-gtk oem-config-slideshow-ubuntu
+echo "Finish Install OEM-config"

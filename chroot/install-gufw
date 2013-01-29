@@ -1,0 +1,7 @@
+#!/bin/bash
+# Kirtley Wienbroer
+# kirtley@osgenie.com
+
+apt-get install -y gufw
+ufw enable
+ufw status

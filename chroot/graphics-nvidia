@@ -1,0 +1,6 @@
+#!/bin/bash
+# Kirtley Wienbroer
+# kirtley@osgenie.com
+echo "Start Install Nvidia Drivers"
+apt-get install -y nvidia-current
+echo "Finish Install Nvidia Drivers"

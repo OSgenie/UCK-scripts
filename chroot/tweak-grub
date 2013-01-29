@@ -1,0 +1,14 @@
+#!/bin/bash
+# Kirtley Wienbroer
+# kirtley@osgenie.com
+
+# tweak grub 
+# speed boot time
+find -name /etc/default/grub | sudo xargs sed -i 's/GRUB_TIMEOUT="10"/GRUB_TIMEOUT="3"/g'
+# Enable quiet boot
+find -name /etc/default/grub | sudo xargs sed -i 's/#GRUB_HIDDEN_TIMEOUT_QUIET="true"/GRUB_HIDDEN_TIMEOUT_QUIET="true"/g'
+# allow for reboot to fix the problem
+find -name /etc/grub.d/00_header | sudo xargs sed -i 's/set timeout=-1/set timeout=15/g'
+# Background image
+cd /boot/grub && wget https://www.dropbox.com/s/5i2mgeojz3zv4el/OSgenie-RGB-Lg.jpg
+sudo update-grub

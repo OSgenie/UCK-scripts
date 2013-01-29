@@ -1,0 +1,17 @@
+# Broadcom drivers
+echo "Installing Broadcom drivers"
+cd /tmp/
+apt-get install -y patch
+wget https://launchpad.net/ubuntu/+archive/primary/+files/b43-fwcutter_014-9_i386.deb
+wget https://launchpad.net/ubuntu/+archive/primary/+files/firmware-b43-installer_014-9_all.deb
+dpkg -i b43-fwcutter_014-9_i386.deb
+dpkg -i firmware-b43-installer_014-9_all.deb
+apt-get install -fy
+wget "http://mirror2.openwrt.org/sources/broadcom-wl-4.150.10.5.tar.bz2"
+wget "http://downloads.openwrt.org/sources/wl_apsta-3.130.20.0.o"
+tar xfvj broadcom-wl-4.150.10.5.tar.bz2
+b43-fwcutter -w /lib/firmware wl_apsta-3.130.20.0.o
+b43-fwcutter --unsupported -w /lib/firmware broadcom-wl-4.150.10.5/driver/wl_apsta_mimo.o
+
+echo "Cleaning Up"
+rm -r /tmp/*

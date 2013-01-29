@@ -1,0 +1,32 @@
+#!/bin/bash
+# Kirtley Wienbroer
+# kirtley@osgenie.com
+# Written with the help of 
+# 		http://unixblogger.wordpress.com/2011/10/18/the-pain-of-an-realtek-rtl8111rtl8168-ethernet-card/
+#		http://www.twm-kd.com/linux/realtek-rtl81688111e-and-ubuntu-linux/
+# July 13 2012
+
+# Install prerequisites
+apt-get install -y build-essential
+apt-get install -y linux-headers-`uname -r`
+
+# Blacklist the origional driver
+echo "blacklist r8168" >> /etc/modprobe.d/blacklist.conf
+
+# RTL8111/RTL8168 PCIe ethernet
+cd /tmp
+wget http://redfish.lab84.osgenie/files/r8168-8.031.00.tar.bz2 
+tar xjf r8168-8.031.00.tar.bz2
+cd r8168-8.031.00
+# build the driver
+make clean modules
+make install
+# install the driver
+depmod -a
+#insmod ./src/r8168.ko
+# Make it available for boot
+# mkinitramfs -o /boot/initrd.img-`uname -r` `uname -r`
+echo "r8168" >> /etc/modules
+
+# Cleanup
+rm -rf /tmp/*

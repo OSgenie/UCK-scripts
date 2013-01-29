@@ -1,0 +1,6 @@
+#/bin/bash
+# Kirtley Wienbroer
+# kirtley@osgenie.com
+echo "Start Enable Network Manager"
+sed -i 's/managed=false/managed=true/g' /etc/NetworkManager/NetworkManager.conf
+echo "Finish Enable Network Manager"
