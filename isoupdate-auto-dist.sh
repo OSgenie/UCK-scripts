@@ -97,6 +97,7 @@ isofilename="$installdir/$name-$unixtime.iso"
 
 function unpack_iso ()
 {
+echo "unpack iso"
 if [ ! -d $remasterdir ]; then
 	uck-remaster-unpack-iso $iso $remasterdir
 	uck-remaster-unpack-rootfs $remasterdir
@@ -105,7 +106,7 @@ fi
 
 function set_isolinux_noprompt ()
 {
-echo "isolinux"
+echo "Seting isolinux.cfg to boot live desktop"
 rm $remasterdir/remaster-iso/isolinux/isolinux.cfg
 echo "default live" > $remasterdir/remaster-iso/isolinux/isolinux.cfg
 echo "label live" >> $remasterdir/remaster-iso/isolinux/isolinux.cfg
@@ -117,6 +118,7 @@ chmod 444 $remasterdir/remaster-iso/isolinux/isolinux.cfg
 
 function modify_iso ()
 {
+echo "modify iso"
 cp -rpvf $scriptpath/$scripts $remasterdir/remaster-root/
 uck-remaster-chroot-rootfs  $remasterdir /$scripts/customize-iso-$type-dist
 }
@@ -135,5 +137,8 @@ cp -v $remasterdir/remaster-new-files/$name-$unixtime.iso.md5 /iso/nfs/$type/md5
 
 # call functions
 check_for_sudo
-sleep 300
+for i in {1..10}: do
+	echo ( ls -1 /iso/downloads )
+	sleep 30
+done
 update_valid_isos

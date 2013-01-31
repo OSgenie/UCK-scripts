@@ -105,7 +105,7 @@ fi
 
 function set_isolinux_noprompt ()
 {
-echo "isolinux"
+echo "Seting isolinux.cfg to boot live desktop"
 rm $remasterdir/remaster-iso/isolinux/isolinux.cfg
 echo "default live" > $remasterdir/remaster-iso/isolinux/isolinux.cfg
 echo "label live" >> $remasterdir/remaster-iso/isolinux/isolinux.cfg
