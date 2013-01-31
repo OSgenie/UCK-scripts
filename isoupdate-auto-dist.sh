@@ -52,6 +52,9 @@ function update_isos ()
 {
 for type in live install
 do
+    echo "+-------------------------------------------------------------------+"
+    echo "+ UPDATING -- $distro for $type"
+    echo "+-------------------------------------------------------------------+"
     set_parameters
     unpack_iso
     if [ $type == 'live' ]; then
