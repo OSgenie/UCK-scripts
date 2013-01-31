@@ -138,7 +138,7 @@ cp -v $remasterdir/remaster-new-files/$name-$unixtime.iso.md5 /iso/nfs/$type/md5
 # call functions
 check_for_sudo
 for i in {1..10}; do
-	echo $( ls -1 /iso/downloads )
+	ls -1 /iso/downloads
 	sleep 30
 done
 update_valid_isos
