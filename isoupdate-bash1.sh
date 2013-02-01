@@ -48,7 +48,8 @@ echo "+ OSgenie ISO Customizing Program - Bash Shell                      +"
 echo "+-------------------------------------------------------------------+"
 echo "Choose $arch iso to update: "
 echo ""
-
+for i in ${#list[@]}; do
+    echo $i") "${list[$i]}
 echo ""
 read -p "Enter the number for your choice: " choice
 distro=${list[$choice]}
