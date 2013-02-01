@@ -45,7 +45,7 @@ done
 
 function user_menu ()
 {
-#clear
+clear
 echo "+-------------------------------------------------------------------+"
 echo "+ OSgenie ISO Customizing Program - Bash Shell                      +"
 echo "+-------------------------------------------------------------------+"
