@@ -34,7 +34,7 @@ for option in $array; do
             iso_release='match'
         fi
     done
-    if [ iso_release != 'match' ]; then
+    if [ $iso_release != 'match' ]; then
         unset list[$num]
     fi
 done
@@ -48,6 +48,7 @@ echo "+ OSgenie ISO Customizing Program - Bash Shell                      +"
 echo "+-------------------------------------------------------------------+"
 echo "Choose $arch iso to update: "
 echo ""
+echo ${list[@]}
 for (( i=0;i<${#list[@]};i++)); do
     echo $i") "${list[$i]}
 done
