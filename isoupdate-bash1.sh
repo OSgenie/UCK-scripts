@@ -32,7 +32,6 @@ for option in $array; do
             available_iso=$option
         fi
         if [ ${x:0:5} == $server_release ]; then
-            list=(${list[@]} $option)
             iso_release='match'
         fi
     done
