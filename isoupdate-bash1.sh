@@ -43,7 +43,7 @@ for option in $array; do
 #        unset list[$num]
 #    else
 #        echo ${list[$num]}
-    fi 
+#    fi 
 done
 }
 
