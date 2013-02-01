@@ -20,26 +20,26 @@ function create_array_of_valid_isos ()
 array=$( ls $folderpath/ )
 i=1
 list=()
-echo ${list[@]}
 for option in $array; do
     iso_release='unknown'
     extension=${option##*.}
     name=$(basename $option .$extension)
     arr=$(echo $name | tr "-" "\n")
     for x in $arr; do
-        if [[ $x = 'i386' || $x = 'x86' || $x = 'i686' || $x = '32bit' || $x = '32' ]] && [ $arch = "i386" ]; then
-            available_iso=$option
-        elif [[ $x = 'amd64' || $x = 'x86_64' || $x = '64' || $x = '64bit' ]] && [ $arch = "amd64" ]; then
-            available_iso=$option
+        if [[ $x = 'i386' || $x = 'x86' || $x = 'i686' || $x = '32bit' || $x = '32' ]]; then
+            os_arch=i386
+        elif [[ $x = 'amd64' || $x = 'x86_64' || $x = '64' || $x = '64bit' ]]; then
+            os_arch=amd64
         fi
         if [ ${x:0:5} == $server_release ]; then
             iso_release='match'
         fi
     done
     if [ $iso_release == 'match' ]; then
-        list=(${list[@]} $available_iso)
+        if [ $arch == $os_arch ]; then        
+            list=(${list[@]} $option)
+        fi
     fi
-    echo ${list[@]}
 done
 echo ${list[@]}
 }
@@ -79,7 +79,7 @@ function set_iso_arch ()
 if [ $os_arch = "i386" ]; then
     isoarch=x86
 elif [ $os_arch = "amd64" ]; then
-isoarch=x86_64
+    isoarch=x86_64
 fi
 }
 
