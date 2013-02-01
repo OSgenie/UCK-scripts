@@ -21,16 +21,19 @@ array=$( ls $folderpath/ )
 i=1
 for option in $array; do
     iso_release='unknown'
+    list=()
     extension=${option##*.}
     name=$(basename $option .$extension)
     arr=$(echo $name | tr "-" "\n")
     for x in $arr; do
         if [[ $x = 'i386' || $x = 'x86' || $x = 'i686' || $x = '32bit' || $x = '32' ]] && [ $arch = "i386" ]; then
-            num=$((i++))
-            list[$num]=$option
+#            num=$((i++))
+#            list[$num]=$option
+            list+=$option
         elif [[ $x = 'amd64' || $x = 'x86_64' || $x = '64' || $x = '64bit' ]] && [ $arch = "amd64" ]; then
-            num=$((i++))
-            list[$num]=$option
+#            num=$((i++))
+#            list[$num]=$option
+            list+=$option
         fi
         if [ ${x:0:5} == $server_release ]; then
             iso_release='match'
