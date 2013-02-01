@@ -27,27 +27,20 @@ for option in $array; do
     arr=$(echo $name | tr "-" "\n")
     for x in $arr; do
         if [[ $x = 'i386' || $x = 'x86' || $x = 'i686' || $x = '32bit' || $x = '32' ]] && [ $arch = "i386" ]; then
-#            num=$((i++))
-#            list[$num]=$option
-            echo $option 1
-            list=(${list[@]} $option)
+            available_iso=$option
         elif [[ $x = 'amd64' || $x = 'x86_64' || $x = '64' || $x = '64bit' ]] && [ $arch = "amd64" ]; then
-#            num=$((i++))
-#            list[$num]=$option
-            echo $option 2
-            list=(${list[@]} $option)
+            available_iso=$option
         fi
         if [ ${x:0:5} == $server_release ]; then
+            list=(${list[@]} $option)
             iso_release='match'
         fi
     done
-    echo ${list[@]}
-#    if [ $iso_release == 'unknown' ]; then
-#        unset list[$num]
-#    else
-#        echo ${list[$num]}
-#    fi 
+    if [ $iso_release == 'match' ]; then
+        list=(${list[@]} $available_iso)
+    fi 
 done
+echo ${list[@]}
 }
 
 function user_menu ()
