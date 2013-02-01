@@ -20,6 +20,7 @@ function create_array_of_valid_isos ()
 array=$( ls $folderpath/ )
 i=1
 list=()
+echo ${list[@]}
 for option in $array; do
     iso_release='unknown'
     extension=${option##*.}
@@ -37,7 +38,8 @@ for option in $array; do
     done
     if [ $iso_release == 'match' ]; then
         list=(${list[@]} $available_iso)
-    fi 
+    fi
+    echo ${list[@]}
 done
 echo ${list[@]}
 }
