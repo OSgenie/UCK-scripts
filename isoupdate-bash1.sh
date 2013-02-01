@@ -39,10 +39,10 @@ for option in $array; do
             iso_release='match'
         fi
     done
-    if [ $iso_release == 'unknown' ]; then
-        unset list[$num]
-    else
-        echo ${list[$num]}
+#    if [ $iso_release == 'unknown' ]; then
+#        unset list[$num]
+#    else
+#        echo ${list[$num]}
     fi 
 done
 }
