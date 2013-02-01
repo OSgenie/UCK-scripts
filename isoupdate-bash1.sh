@@ -33,6 +33,7 @@ for option in $array; do
         fi
         if [ ${x:0:5} == $server_release ]; then
             iso_release='match'
+            echo $iso_release
         fi
     done
     if [ '$iso_release' != 'match' ]; then
