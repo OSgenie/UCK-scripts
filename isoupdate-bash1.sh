@@ -36,6 +36,7 @@ for option in $array; do
 #            list[$num]=$option
             echo $option
             list=(${list[@]} $option)
+            ehco what
         fi
         if [ ${x:0:5} == $server_release ]; then
             iso_release='match'
