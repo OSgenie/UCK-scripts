@@ -97,7 +97,7 @@ isofilename="$installdir/$name-$unixtime.iso"
 
 function unpack_iso ()
 {
-echo "unpack iso"
+echo "+++ UNPACKING ISO"
 if [ ! -d $remasterdir ]; then
 	uck-remaster-unpack-iso $iso $remasterdir
 	uck-remaster-unpack-rootfs $remasterdir
@@ -106,7 +106,7 @@ fi
 
 function set_isolinux_noprompt ()
 {
-echo "Seting isolinux.cfg to boot live desktop"
+echo "+++ CONFIGURING isolinux.cfg to boot live desktop"
 rm $remasterdir/remaster-iso/isolinux/isolinux.cfg
 echo "default live" > $remasterdir/remaster-iso/isolinux/isolinux.cfg
 echo "label live" >> $remasterdir/remaster-iso/isolinux/isolinux.cfg
@@ -118,16 +118,17 @@ chmod 444 $remasterdir/remaster-iso/isolinux/isolinux.cfg
 
 function modify_iso ()
 {
-echo "modify iso"
-cp -rpvf $scriptpath/$scripts $remasterdir/remaster-root/
+echo "+++ MODIFYING ISO"
+cp -rpf $scriptpath/$scripts $remasterdir/remaster-root/
 echo "/$scripts/customize-iso-$type-dist"
 uck-remaster-chroot-rootfs  $remasterdir /$scripts/customize-iso-$type-dist
 }
 
 function pack_iso ()
 {
+echo "+++ PACKING ISO"
 uck-remaster-remove-win32-files $remasterdir
-rm -rv $remasterdir/remaster-root/$scripts
+rm -r $remasterdir/remaster-root/$scripts
 uck-remaster-pack-rootfs $remasterdir #[-c|--clean-desktop-manifest]
 #		cp -fv $isoseed $remasterdir/remaster-iso/preseed/
 #		cp -fv $isocfg $remasterdir/remaster-iso/isolinux/txt.cfg
