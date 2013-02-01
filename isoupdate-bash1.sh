@@ -34,7 +34,7 @@ for option in $array; do
             iso_release='match'
         fi
     done
-    if [ iso_release != 'match' ]
+    if [ iso_release != 'match' ]; then
         unset list[$num]
     fi
 done
