@@ -36,8 +36,11 @@ for option in $array; do
             iso_release='match'
         fi
     done
-    echo ${list[$num]}
-    echo $iso_release
+    if [ $iso_release == 'unknown' ]; then
+        unset list[$num]
+    else
+        echo ${list[$num]}
+    fi 
 done
 }
 
