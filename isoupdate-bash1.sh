@@ -14,14 +14,8 @@ if [ $UID != 0 ]; then
 fi
 }
 
-function user_menu ()
+function create_array_of_valid_isos ()
 {
-clear
-echo "+-------------------------------------------------------------------+"
-echo "+ OSgenie ISO Customizing Program - Bash Shell                      +"
-echo "+-------------------------------------------------------------------+"
-echo "Choose $arch iso to update: "
-echo ""
 array=$( ls $folderpath/ )
 i=1
 for option in $array; do
@@ -32,14 +26,29 @@ for option in $array; do
         if [[ $x = 'i386' || $x = 'x86' || $x = 'i686' || $x = '32bit' || $x = '32' ]] && [ $arch = "i386" ]; then
             num=$((i++))
             list[$num]=$option
-            echo "    $num) ${list[$num]}"
         elif [[ $x = 'amd64' || $x = 'x86_64' || $x = '64' || $x = '64bit' ]] && [ $arch = "amd64" ]; then
             num=$((i++))
             list[$num]=$option
-            echo "    $num) ${list[$num]}"
+        fi
+        if [ ${x:0:5} == $server_release ]; then
+            iso_release='match'
         fi
     done
+    if [ iso_release != 'match' ]
+        unset list[$num]
+    fi
 done
+}
+
+function user_menu ()
+{
+clear
+echo "+-------------------------------------------------------------------+"
+echo "+ OSgenie ISO Customizing Program - Bash Shell                      +"
+echo "+-------------------------------------------------------------------+"
+echo "Choose $arch iso to update: "
+echo ""
+
 echo ""
 read -p "Enter the number for your choice: " choice
 distro=${list[$choice]}
@@ -57,32 +66,37 @@ fi
 echo "Updating $distro..."
 }
 
+function set_iso_arch ()
+{
+# valid options are #x86,x86_64,ia64,ppc
+if [ $os_arch = "i386" ]; then
+    isoarch=x86
+elif [ $os_arch = "amd64" ]; then
+isoarch=x86_64
+fi
+}
+
 function set_parameters ()
 {
 iso=$folderpath/$distro
 # set parameters
-if [ $arch = "i386" ]; then
-isoarch=x86 #x86_64,ia64,ppc
-elif [ $arch = "amd64" ]; then
-isoarch=x86_64
-fi
 unixtime=(`date +%s`)
 # identify iso name
 fullname=$(basename "$iso")
 extension=${fullname##*.}
 directory=$(dirname $iso)
 name=$(basename $iso .$extension)
-	if [ $extension == "iso" ]; then
-		# set working directories
-		remasterdir=/work/$type/$name
-		installdir=/iso/nfs/$type
-		isofilename="$installdir/$name-$unixtime.iso"
-		# customization scripts
-		#isoseed=/home/kirtley/Dropbox/Scripts/config_files/auto.seed
-		#isocfg=/home/kirtley/Dropbox/Scripts/config_files/txt.cfg
-	else
-		exit
-	fi
+if [ $extension == "iso" ]; then
+	# set working directories
+	remasterdir=/work/$type/$name
+	installdir=/iso/nfs/$type
+	isofilename="$installdir/$name-$unixtime.iso"
+	# customization scripts
+	#isoseed=/home/kirtley/Dropbox/Scripts/config_files/auto.seed
+	#isocfg=/home/kirtley/Dropbox/Scripts/config_files/txt.cfg
+else
+	exit
+fi
 }
 
 function isoremaster ()
@@ -119,6 +133,7 @@ cp -v $remasterdir/remaster-new-files/$name-$unixtime.iso.md5 /iso/nfs/$type/md5
 # call functions
 check_for_sudo
 user_menu
+set_iso_arch
 set_parameters
 isoremaster
 isomove
