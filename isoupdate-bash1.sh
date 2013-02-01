@@ -20,6 +20,7 @@ function create_array_of_valid_isos ()
 array=$( ls $folderpath/ )
 i=1
 for option in $array; do
+    iso_release='unknown'
     extension=${option##*.}
     name=$(basename $option .$extension)
     arr=$(echo $name | tr "-" "\n")
