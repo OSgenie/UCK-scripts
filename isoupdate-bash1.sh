@@ -41,6 +41,7 @@ for option in $array; do
             iso_release='match'
         fi
     done
+    echo ${list[@]}
 #    if [ $iso_release == 'unknown' ]; then
 #        unset list[$num]
 #    else
