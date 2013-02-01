@@ -51,7 +51,6 @@ echo "+ OSgenie ISO Customizing Program - Bash Shell                      +"
 echo "+-------------------------------------------------------------------+"
 echo "Choose $arch iso to update: "
 echo ""
-echo ${list[@]}
 for (( i=0;i<${#list[@]};i++)); do
     echo $i") "${list[$i]}
 done
