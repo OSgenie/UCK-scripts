@@ -5,7 +5,7 @@ echo "Start Install ubuntu restricted extras"
 release=$(lsb_release -cs)
 for repository in universe multiverse; do
     grep_deb=$(grep "$repository" /etc/apt/sources.list)
-    if [  "$grep_deb" != "$repository" ]; then
+    if [  "$grep_deb" == "" ]; then
         echo "deb http://archive.ubuntu.com/ubuntu/" $release $repository | tee -a /etc/apt/sources.list
     fi
 done
@@ -15,7 +15,7 @@ mv /etc/wgetrc /etc/wgetrc.orig
 chmod a-w /etc/wgetrc.orig
 cat > /etc/wgetrc << EOM
 passive_ftp = on
-http_proxy = http://192.168.11.3:3128/
+http_proxy = http://192.168.11.10:3128/
 use_proxy = on
 EOM
 echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections
