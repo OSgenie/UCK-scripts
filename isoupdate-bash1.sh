@@ -29,10 +29,12 @@ for option in $array; do
         if [[ $x = 'i386' || $x = 'x86' || $x = 'i686' || $x = '32bit' || $x = '32' ]] && [ $arch = "i386" ]; then
 #            num=$((i++))
 #            list[$num]=$option
+            echo $option
             list+=$option
         elif [[ $x = 'amd64' || $x = 'x86_64' || $x = '64' || $x = '64bit' ]] && [ $arch = "amd64" ]; then
 #            num=$((i++))
 #            list[$num]=$option
+            echo $option
             list+=$option
         fi
         if [ ${x:0:5} == $server_release ]; then
