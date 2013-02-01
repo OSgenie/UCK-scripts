@@ -5,6 +5,7 @@ folderpath=/iso/downloads
 scriptpath=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 scripts=chroot
 arch=$(dpkg --print-architecture)
+server_release=$(lsb_release -rs)
 
 function check_for_sudo ()
 {
