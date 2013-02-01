@@ -1,7 +1,9 @@
 #!/bin/bash
 # kirtley wienbroer
 # kirtley@osgenie.com
-
+folderpath=/iso/downloads
+scriptpath=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+scripts=chroot
 arch=$(dpkg --print-architecture)
 
 function check_for_sudo ()
@@ -20,7 +22,6 @@ echo "+ OSgenie Automated ISO updating program                            +"
 echo "+-------------------------------------------------------------------+"
 echo "Choose $arch iso to update: "
 echo ""
-folderpath=/iso/downloads
 array=$( ls $folderpath/ )
 i=1
 for option in $array
@@ -68,8 +69,6 @@ name=$(basename $iso .$extension)
 	installdir=/iso/nfs/install
 	isofilename="$installdir/$name-$unixtime.iso"
 	# customization scripts
-	scriptpath=/home/kirtley/git/updater
-	scripts=chroot
 #	isoseed=/home/kirtley/Dropbox/Scripts/config_files/auto.seed
 #	isocfg=/home/kirtley/Dropbox/Scripts/config_files/txt.cfg
 	else
