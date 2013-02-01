@@ -136,6 +136,7 @@ cp -v $remasterdir/remaster-new-files/$name-$unixtime.iso.md5 /iso/nfs/$type/md5
 
 # call functions
 check_for_sudo
+create_array_of_valid_isos
 user_menu
 set_iso_arch
 set_parameters
