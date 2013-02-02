@@ -83,10 +83,9 @@ fi
 
 function set_parameters ()
 {
-fullname=$(basename "$iso")
+fullname=$(basename "$distro")
 extension=${fullname##*.}
-directory=$(dirname $iso)
-name=$(basename $iso .$extension)
+name=$(basename $distro .$extension)
 remasterdir=/work/$type/$name
 installdir=/iso/nfs/$type
 isofilename="$installdir/$name-$unixtime.iso"
