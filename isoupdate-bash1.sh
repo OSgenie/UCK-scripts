@@ -151,6 +151,7 @@ check_for_sudo
 create_array_of_valid_isos
 user_menu
 set_iso_arch
+set_parameters
 unpack_iso
 modify_iso
 pack_iso
