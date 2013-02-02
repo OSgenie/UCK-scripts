@@ -41,7 +41,6 @@ for option in $array; do
             list=(${list[@]} $option)
     fi
 done
-echo ${list[@]}
 }
 
 function update_valid_isos ()
@@ -49,7 +48,6 @@ function update_valid_isos ()
 for (( i=0;i<${#list[@]};i++)); do
     set_iso_arch
     distro=${list[$i]}
-    echo $distro
     iso=$folderpath/$distro
     unixtime=(`date +%s`)
     update_iso
@@ -172,7 +170,7 @@ cp -v $remasterdir/remaster-new-files/$name-$unixtime.iso.md5 /iso/nfs/$type/md5
 
 # call functions
 check_for_sudo
-#echo "Waiting 120 seconds for network resources"
-#sleep 120
+echo "Waiting 120 seconds for network resources"
+sleep 120
 create_array_of_valid_isos
 update_valid_isos
