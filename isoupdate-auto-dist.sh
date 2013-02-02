@@ -98,6 +98,7 @@ echo "+++ UNPACKING ISO"
 if [ ! -d $remasterdir ]; then
 	uck-remaster-unpack-iso $iso $remasterdir
 	uck-remaster-unpack-rootfs $remasterdir
+	uck-remaster-unpack-initrd $remasterdir
 fi
 }
 
@@ -127,6 +128,7 @@ function pack_iso ()
 echo "+++ PACKING ISO"
 uck-remaster-remove-win32-files $remasterdir
 rm -r $remasterdir/remaster-root/$scripts
+uck-remaster-pack-initrd $remasterdir
 uck-remaster-pack-rootfs $remasterdir #[-c|--clean-desktop-manifest]
 #		cp -fv $isoseed $remasterdir/remaster-iso/preseed/
 #		cp -fv $isocfg $remasterdir/remaster-iso/isolinux/txt.cfg
