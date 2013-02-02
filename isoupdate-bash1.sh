@@ -121,6 +121,7 @@ chmod 444 $remasterdir/remaster-iso/isolinux/isolinux.cfg
 function modify_iso ()
 {
 if [ $type == 'live' ]; then
+    ls $remasterdir/remaster-iso/casper/vmlinuz
     if [ -e $remasterdir/remaster-iso/casper/vmlinuz ]; then
         set_isolinux_noprompt
     else
