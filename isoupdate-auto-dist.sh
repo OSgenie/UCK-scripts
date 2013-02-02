@@ -62,26 +62,23 @@ for type in live install; do
     echo "+ `date +%c`"
     echo "+-------------------------------------------------------------------+"    
     set_parameters
-# for testing purposes, this prevents a previously modified isos from being modified again
-#if [ ! -d $remasterdir ]; then
     set_iso_arch
     unpack_iso
-    if [ $type == 'live' ]; then
+    if [ $type == 'install' ]; then
+        modify_iso_install
+    elif [ $type == 'live' ]; then
         if [ -e $remasterdir/remaster-iso/casper/vmlinuz ];then
             set_isolinux_noprompt
             modify_iso_live
         else
             echo "Not a LiveCD"
         fi
-    elif [ $type == 'install' ]; then
-        modify_iso_install
     else
         echo "+-------------------------------------------------------------------+"
         echo "+++++ ERROR -- $distro for $type"
         echo "+-------------------------------------------------------------------+"
     fi
     pack_iso
-#fi
 done
 }
 
