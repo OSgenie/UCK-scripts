@@ -20,15 +20,13 @@ fi
 function update_valid_isos ()
 {
 array=$( ls $folderpath/ )
-for option in $array
-do
+for option in $array; do
     iso_release='unknown'
     extension=${option##*.}
     name=$(basename $option .$extension)
     if [ $extension == "iso" ]; then
         arr=$(echo $name | tr "-" "\n")
-        for x in $arr
-        do
+        for x in $arr; do
             if [[ $x = 'i386' || $x = 'x86' || $x = 'i686' || $x = '32bit' || $x = '32' ]]; then
                 os_arch='i386'
             elif [[ $x = 'amd64' || $x = 'x86_64' || $x = '64' || $x = '64bit' ]]; then
@@ -51,8 +49,7 @@ done
 
 function update_iso ()
 {
-for type in live install
-do
+for type in live install; do
     echo "+-------------------------------------------------------------------+"
     echo "+ UPDATING -- $distro for $type"
     echo "+-------------------------------------------------------------------+"    
@@ -121,6 +118,7 @@ function modify_iso ()
 echo "+++ MODIFYING ISO"
 cp -rpf $scriptpath/$scripts $remasterdir/remaster-root/
 echo "/$scripts/customize-iso-$type-dist"
+mount -o bind $remasterdir/dev /remaster-root/dev
 uck-remaster-chroot-rootfs  $remasterdir /$scripts/customize-iso-$type-dist
 }
 

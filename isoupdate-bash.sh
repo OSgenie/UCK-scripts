@@ -4,7 +4,7 @@
 folderpath=/iso/downloads
 scriptpath=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 scripts=chroot
-arch=$(dpkg --print-architecture)
+server_arch=$(dpkg --print-architecture)
 server_release=$(lsb_release -rs)
 
 function check_for_sudo ()
@@ -35,10 +35,8 @@ for option in $array; do
             iso_release='match'
         fi
     done
-    if [ $iso_release == 'match' ]; then
-        if [ $arch == $os_arch ]; then        
+    if [ $iso_release == 'match' ] && [ $server_arch == $os_arch ]; then        
             list=(${list[@]} $option)
-        fi
     fi
 done
 }
@@ -49,7 +47,7 @@ clear
 echo "+-------------------------------------------------------------------+"
 echo "+ OSgenie ISO Customizing Program - Bash Shell                      +"
 echo "+-------------------------------------------------------------------+"
-echo "Choose $arch iso to update: "
+echo "Choose $server_arch iso to update: "
 echo ""
 for (( i=0;i<${#list[@]};i++)); do
     echo $i") "${list[$i]}
@@ -113,6 +111,7 @@ if [ ! -d $remasterdir ]; then
 fi
 if [ -e $remasterdir/remaster-iso/casper/vmlinuz ];then
 	cp -rpvf $scriptpath/$scripts $remasterdir/remaster-root/
+	mount -o bind $remasterdir/dev /remaster-root/dev
 	uck-remaster-chroot-rootfs  $remasterdir /bin/bash
 	uck-remaster-remove-win32-files $remasterdir
 	rm -rv $remasterdir/remaster-root/$scripts
