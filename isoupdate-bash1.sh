@@ -120,7 +120,6 @@ chmod 444 $remasterdir/remaster-iso/isolinux/isolinux.cfg
 function modify_iso ()
 {
 if [ $type == 'live' ]; then
-    ls $remasterdir/remaster-iso/casper/vmlinuz
     if [ -e $remasterdir/remaster-iso/casper/vmlinuz ]; then
         set_isolinux_noprompt
     else
@@ -144,7 +143,6 @@ uck-remaster-pack-iso $isofilename $remasterdir --generate-md5 --arch=$isoarch -
 #uck-remaster-clean-all $remasterdir
 cp -v $remasterdir/remaster-new-files/$name-$unixtime.iso.md5 /iso/nfs/$type/md5/
 }
-
 
 check_for_sudo
 create_array_of_valid_isos
