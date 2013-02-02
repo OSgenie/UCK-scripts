@@ -119,7 +119,7 @@ function modify_iso ()
 echo "+++ MODIFYING ISO"
 cp -rpf $scriptpath/$scripts $remasterdir/remaster-root/
 echo "/$scripts/customize-iso-$type-dist"
-mount -o bind $remasterdir/dev /remaster-root/dev
+mount -o bind /dev $remasterdir/remaster-root/dev
 uck-remaster-chroot-rootfs  $remasterdir /$scripts/customize-iso-$type-dist
 }
 

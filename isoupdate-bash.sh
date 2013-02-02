@@ -112,7 +112,7 @@ if [ ! -d $remasterdir ]; then
 fi
 if [ -e $remasterdir/remaster-iso/casper/vmlinuz ];then
 	cp -rpvf $scriptpath/$scripts $remasterdir/remaster-root/
-	mount -o bind $remasterdir/dev /remaster-root/dev
+	mount -o bind /dev $remasterdir/remaster-root/dev
 	uck-remaster-chroot-rootfs  $remasterdir /bin/bash
 	uck-remaster-remove-win32-files $remasterdir
 	rm -rv $remasterdir/remaster-root/$scripts
