@@ -9,7 +9,7 @@ for repository in universe multiverse; do
         echo "deb http://archive.ubuntu.com/ubuntu/" $release $repository | tee -a /etc/apt/sources.list
     fi
 done
-apt-get update
+apt-get update -qq
 apt-get install -qq debconf-utils cabextract libnspr4-0d
 mv /etc/wgetrc /etc/wgetrc.orig
 chmod a-w /etc/wgetrc.orig

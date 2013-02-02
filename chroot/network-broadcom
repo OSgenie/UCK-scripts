@@ -1,4 +1,4 @@
-# Broadcom drivers
+#!/bin/bash
 echo "Installing Broadcom drivers"
 cd /tmp/
 apt-get install -y patch
@@ -12,6 +12,5 @@ wget "http://downloads.openwrt.org/sources/wl_apsta-3.130.20.0.o"
 tar xfvj broadcom-wl-4.150.10.5.tar.bz2
 b43-fwcutter -w /lib/firmware wl_apsta-3.130.20.0.o
 b43-fwcutter --unsupported -w /lib/firmware broadcom-wl-4.150.10.5/driver/wl_apsta_mimo.o
-
 echo "Cleaning Up"
 rm -r /tmp/*

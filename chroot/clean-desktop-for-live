@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "Clean up desktop icons"
+apt-get purge -y ubiquity
+rm -v /etc/skel/examples.desktop

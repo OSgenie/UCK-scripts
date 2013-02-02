@@ -12,8 +12,8 @@ scripts=chroot
 function check_for_sudo ()
 {
 if [ $UID != 0 ]; then
-		echo "You need root privileges"
-		exit 2
+        echo "You need root privileges"
+        exit 2
 fi
 }
 
@@ -52,19 +52,30 @@ function update_iso ()
 for type in live install; do
     echo "+-------------------------------------------------------------------+"
     echo "+ UPDATING -- $distro for $type"
+    echo "+ `date +%c`"
     echo "+-------------------------------------------------------------------+"    
     set_parameters
 # for testing purposes, this prevents a previously modified isos from being modified again
 #if [ ! -d $remasterdir ]; then
     set_iso_arch
     unpack_iso
-    if [ -e $remasterdir/remaster-iso/casper/vmlinuz ];then
-        if [ $type == 'live' ]; then
+    if [ $type == 'live' ]; then
+        if [ -e $remasterdir/remaster-iso/casper/vmlinuz ];then
             set_isolinux_noprompt
+            modify_iso_live
+        else
+            echo "Not a LiveCD"
+            break
         fi
-    modify_iso
-    pack_iso
+    elif [ $type == 'install' ]; then
+        modify_iso_install
+    else
+        echo "+-------------------------------------------------------------------+"
+        echo "+++++ ERROR -- $distro for $type"
+        echo "+-------------------------------------------------------------------+"
+        break
     fi
+    pack_iso
 #fi
 done
 }
@@ -88,17 +99,19 @@ name=$(basename $iso .$extension)
 remasterdir=/work/$type/$name
 installdir=/iso/nfs/$type
 isofilename="$installdir/$name-$unixtime.iso"
-#	isoseed=/home/kirtley/Dropbox/Scripts/config_files/auto.seed
-#	isocfg=/home/kirtley/Dropbox/Scripts/config_files/txt.cfg
+#isoseed=/home/kirtley/Dropbox/Scripts/config_files/auto.seed
+#isocfg=/home/kirtley/Dropbox/Scripts/config_files/txt.cfg
 }
 
 function unpack_iso ()
 {
 echo "+++ UNPACKING ISO"
 if [ ! -d $remasterdir ]; then
-	uck-remaster-unpack-iso $iso $remasterdir
-	uck-remaster-unpack-rootfs $remasterdir
-	uck-remaster-unpack-initrd $remasterdir
+    uck-remaster-unpack-iso $iso $remasterdir
+    uck-remaster-unpack-rootfs $remasterdir
+    uck-remaster-unpack-initrd $remasterdir
+    cp -rpf $scriptpath/$scripts $remasterdir/remaster-root/
+    mount -o bind /dev $remasterdir/remaster-root/dev
 fi
 }
 
@@ -114,13 +127,26 @@ echo "  append  file=/cdrom/preseed/ubuntu.seed boot=casper initrd=/casper/initr
 chmod 444 $remasterdir/remaster-iso/isolinux/isolinux.cfg
 }
 
-function modify_iso ()
+function modify_iso_live ()
 {
 echo "+++ MODIFYING ISO"
-cp -rpf $scriptpath/$scripts $remasterdir/remaster-root/
-echo "/$scripts/customize-iso-$type-dist"
-mount -o bind /dev $remasterdir/remaster-root/dev
-uck-remaster-chroot-rootfs  $remasterdir /$scripts/customize-iso-$type-dist
+uck-remaster-chroot-rootfs  $remasterdir /$scripts/apt-cacher-apt-get-update
+uck-remaster-chroot-rootfs  $remasterdir /$scripts/apt-get-dist-upgrade
+uck-remaster-chroot-rootfs  $remasterdir /$scripts/install-ubuntu-restricted-extras
+uck-remaster-chroot-rootfs  $remasterdir /$scripts/enable-network-manager
+uck-remaster-chroot-rootfs  $remasterdir /$scripts/clean-desktop-for-live
+uck-remaster-chroot-rootfs  $remasterdir /$scripts/post-dist-upgrade-cleanup
+}
+
+function modify_iso_install ()
+{
+echo "+++ MODIFYING ISO"
+uck-remaster-chroot-rootfs  $remasterdir /$scripts/apt-cacher-apt-get-update
+uck-remaster-chroot-rootfs  $remasterdir /$scripts/apt-get-dist-upgrade
+uck-remaster-chroot-rootfs  $remasterdir /$scripts/install-ubuntu-restricted-extras
+uck-remaster-chroot-rootfs  $remasterdir /$scripts/enable-network-manager
+uck-remaster-chroot-rootfs  $remasterdir /$scripts/install-oem-config
+uck-remaster-chroot-rootfs  $remasterdir /$scripts/post-dist-upgrade-cleanup
 }
 
 function pack_iso ()
@@ -130,10 +156,10 @@ uck-remaster-remove-win32-files $remasterdir
 rm -r $remasterdir/remaster-root/$scripts
 uck-remaster-pack-initrd $remasterdir
 uck-remaster-pack-rootfs $remasterdir #[-c|--clean-desktop-manifest]
-#		cp -fv $isoseed $remasterdir/remaster-iso/preseed/
-#		cp -fv $isocfg $remasterdir/remaster-iso/isolinux/txt.cfg
+#cp -fv $isoseed $remasterdir/remaster-iso/preseed/
+#cp -fv $isocfg $remasterdir/remaster-iso/isolinux/txt.cfg
 uck-remaster-pack-iso $isofilename $remasterdir --generate-md5 --arch=$isoarch --description=$name
-#		uck-remaster-clean-all $remasterdir
+#uck-remaster-clean-all $remasterdir
 cp -v $remasterdir/remaster-new-files/$name-$unixtime.iso.md5 /iso/nfs/$type/md5/
 }
 

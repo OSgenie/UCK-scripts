@@ -1,0 +1,7 @@
+#!/bin/bash
+echo "Apt-get upgrade"
+mv /etc/kernel/postinst.d/zz-update-grub /chroot/zz-update-grub 
+apt-get upgrade -qq
+apt-get autoremove -qq
+apt-get install -fy
+mv /chroot/zz-update-grub /etc/kernel/postinst.d/zz-update-grub
