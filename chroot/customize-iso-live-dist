@@ -6,9 +6,11 @@ export http_proxy=http://192.168.11.10:3142
 rm -f /target/etc/apt/sources.list.d/dvd.list
 apt-get update
 echo "Apt-get upgrade"
+mv /etc/kernel/postinst.d/zz-update-grub /etc/kernel/postinst.d/disable-zz-update-grub 
 apt-get dist-upgrade -y
 apt-get autoremove -y
 apt-get install -fy
+mv /etc/kernel/postinst.d/disable-zz-update-grub /etc/kernel/postinst.d/zz-update-grub 
 echo "Running Configurations"
 ./chroot/install-ubuntu-restricted-extras
 ./chroot/enable-network-manager
