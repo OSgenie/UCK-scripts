@@ -72,7 +72,6 @@ for type in live install; do
             modify_iso_live
         else
             echo "Not a LiveCD"
-            break
         fi
     elif [ $type == 'install' ]; then
         modify_iso_install
@@ -80,7 +79,6 @@ for type in live install; do
         echo "+-------------------------------------------------------------------+"
         echo "+++++ ERROR -- $distro for $type"
         echo "+-------------------------------------------------------------------+"
-        break
     fi
     pack_iso
 #fi
@@ -172,6 +170,6 @@ cp -v $remasterdir/remaster-new-files/$name-$unixtime.iso.md5 /iso/nfs/$type/md5
 
 # call functions
 check_for_sudo
-sleep 120
+#sleep 120
 create_array_of_valid_isos
 update_valid_isos
