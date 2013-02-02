@@ -108,6 +108,7 @@ function isoremaster ()
 if [ ! -d $remasterdir ]; then
 	uck-remaster-unpack-iso $iso $remasterdir
 	uck-remaster-unpack-rootfs $remasterdir
+    uck-remaster-unpack-initrd $remasterdir
 fi
 if [ -e $remasterdir/remaster-iso/casper/vmlinuz ];then
 	cp -rpvf $scriptpath/$scripts $remasterdir/remaster-root/
@@ -115,6 +116,7 @@ if [ -e $remasterdir/remaster-iso/casper/vmlinuz ];then
 	uck-remaster-chroot-rootfs  $remasterdir /bin/bash
 	uck-remaster-remove-win32-files $remasterdir
 	rm -rv $remasterdir/remaster-root/$scripts
+    uck-remaster-pack-initrd $remasterdir
 	uck-remaster-pack-rootfs $remasterdir #[-c|--clean-desktop-manifest]
 #		cp -v /home/kirtley/Dropbox/Scripts/config_files/auto.seed $remasterdir/remaster-iso/preseed/
 #		cp -fv /home/kirtley/Dropbox/Scripts/config_files/txt.cfg.casper $remasterdir/remaster-iso/isolinux/txt.cfg
