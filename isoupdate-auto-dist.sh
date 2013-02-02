@@ -115,7 +115,7 @@ if [ ! -d $remasterdir ]; then
     uck-remaster-unpack-iso $iso $remasterdir
     uck-remaster-unpack-rootfs $remasterdir
     uck-remaster-unpack-initrd $remasterdir
-    cp -rpf $scriptpath/$scripts $remasterdir/remaster-root/
+    cp -rpvf $scriptpath/$scripts $remasterdir/remaster-root/
     mount -o bind /dev $remasterdir/remaster-root/dev
 fi
 }

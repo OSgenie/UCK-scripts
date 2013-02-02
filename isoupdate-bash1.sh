@@ -57,6 +57,7 @@ done
 echo ""
 read -p "Enter the number for your choice: " choice
 distro=${list[$choice]}
+iso=$folderpath/$distro
 echo "1) Customizing an ISO for Live booting"
 echo "2) Customizing an ISO for Installation"
 read -p "Please enter 1 or 2: " what_type
@@ -83,9 +84,9 @@ fi
 
 function set_parameters ()
 {
-fullname=$(basename "$distro")
+fullname=$(basename "$iso")
 extension=${fullname##*.}
-name=$(basename $distro .$extension)
+name=$(basename $iso .$extension)
 remasterdir=/work/$type/$name
 installdir=/iso/nfs/$type
 isofilename="$installdir/$name-$unixtime.iso"
