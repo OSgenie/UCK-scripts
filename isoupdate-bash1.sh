@@ -125,7 +125,7 @@ if [ $type == 'live' ]; then
         set_isolinux_noprompt
     else
         echo "Not a LiveCD"
-        break
+        exit
     fi
 fi
 uck-remaster-chroot-rootfs  $remasterdir /bin/bash
