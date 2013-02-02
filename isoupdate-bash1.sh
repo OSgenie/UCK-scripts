@@ -101,9 +101,9 @@ if [ ! -d $remasterdir ]; then
     uck-remaster-unpack-iso $iso $remasterdir
     uck-remaster-unpack-rootfs $remasterdir
     uck-remaster-unpack-initrd $remasterdir
-    cp -rpfv $scriptpath/$scripts $remasterdir/remaster-root/
-    mount -o bind /dev $remasterdir/remaster-root/dev
 fi
+cp -rpfv $scriptpath/$scripts $remasterdir/remaster-root/
+mount -o bind /dev $remasterdir/remaster-root/dev
 }
 
 function set_isolinux_noprompt ()
