@@ -1,7 +1,5 @@
 #!/bin/bash
-[ -r /root/.bashrc ] && . /root/.bashrc
-[ -r /root/.profile ] && . /root/.profile
-exec "$@"
+PATH=/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin
 folderpath=/iso/downloads
 # updating server architecture
 server_arch=$(dpkg --print-architecture)
