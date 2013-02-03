@@ -132,23 +132,13 @@ chmod 444 $remasterdir/remaster-iso/isolinux/isolinux.cfg
 function modify_iso_live ()
 {
 echo "+++ MODIFYING ISO"
-uck-remaster-chroot-rootfs  $remasterdir /$scripts/apt-cacher-apt-get-update
-uck-remaster-chroot-rootfs  $remasterdir /$scripts/apt-get-dist-upgrade
-uck-remaster-chroot-rootfs  $remasterdir /$scripts/install-ubuntu-restricted-extras
-uck-remaster-chroot-rootfs  $remasterdir /$scripts/enable-network-manager
-uck-remaster-chroot-rootfs  $remasterdir /$scripts/clean-desktop-for-live
-uck-remaster-chroot-rootfs  $remasterdir /$scripts/post-dist-upgrade-cleanup
+uck-remaster-chroot-rootfs  $remasterdir /$scripts/configure-live-iso
 }
 
 function modify_iso_install ()
 {
 echo "+++ MODIFYING ISO"
-uck-remaster-chroot-rootfs  $remasterdir /$scripts/apt-cacher-apt-get-update
-uck-remaster-chroot-rootfs  $remasterdir /$scripts/apt-get-dist-upgrade
-uck-remaster-chroot-rootfs  $remasterdir /$scripts/install-ubuntu-restricted-extras
-uck-remaster-chroot-rootfs  $remasterdir /$scripts/enable-network-manager
-uck-remaster-chroot-rootfs  $remasterdir /$scripts/install-oem-config
-uck-remaster-chroot-rootfs  $remasterdir /$scripts/post-dist-upgrade-cleanup
+uck-remaster-chroot-rootfs  $remasterdir /$scripts/configure-install-iso
 }
 
 function pack_iso ()
