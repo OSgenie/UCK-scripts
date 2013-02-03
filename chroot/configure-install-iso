@@ -4,4 +4,4 @@
 ./chroot/install-ubuntu-restricted-extras
 ./chroot/enable-network-manager
 ./chroot/install-oem-config
-./chroot/post-dist-upgrade-cleanup
+./chroot/post-apt-get-dist-upgrade-cleanup

@@ -3,5 +3,5 @@
 ./chroot/apt-get-dist-upgrade
 ./chroot/install-ubuntu-restricted-extras
 ./chroot/enable-network-manager
-./chroot/clean-desktop-for-live
-./chroot/post-apt-get-dist-upgrade-cleanup
+./chroot/install-oem-config
+./chroot/post-dist-upgrade-cleanup

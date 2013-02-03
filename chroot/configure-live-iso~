@@ -4,4 +4,4 @@
 ./chroot/install-ubuntu-restricted-extras
 ./chroot/enable-network-manager
 ./chroot/clean-desktop-for-live
-./chroot/post-apt-get-dist-upgrade-cleanup
+./chroot/post-dist-upgrade-cleanup
