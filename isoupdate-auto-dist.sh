@@ -1,5 +1,6 @@
 #!/bin/bash
 PATH=/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin
+HOME=/root/
 folderpath=/iso/downloads
 # updating server architecture
 server_arch=$(dpkg --print-architecture)
@@ -108,10 +109,10 @@ function unpack_iso ()
 {
 echo "+++ UNPACKING ISO"
 if [ ! -d $remasterdir ]; then
-    /usr/bin/uck-remaster-unpack-iso $iso $remasterdir
-    /usr/bin/uck-remaster-unpack-rootfs $remasterdir
+    uck-remaster-unpack-iso $iso $remasterdir
+    uck-remaster-unpack-rootfs $remasterdir
 fi
-/usr/bin/uck-remaster-unpack-initrd $remasterdir
+uck-remaster-unpack-initrd $remasterdir
 cp -rpvf $scriptpath/$scripts $remasterdir/remaster-root/
 mount -o bind /dev $remasterdir/remaster-root/dev
 }
@@ -131,26 +132,26 @@ chmod 444 $remasterdir/remaster-iso/isolinux/isolinux.cfg
 function modify_iso_live ()
 {
 echo "+++ MODIFYING ISO"
-/usr/bin/uck-remaster-chroot-rootfs $remasterdir /$scripts/configure-live-iso
+uck-remaster-chroot-rootfs $remasterdir /$scripts/configure-live-iso
 }
 
 function modify_iso_install ()
 {
 echo "+++ MODIFYING ISO"
-/usr/bin/uck-remaster-chroot-rootfs $remasterdir /$scripts/configure-install-iso
+uck-remaster-chroot-rootfs $remasterdir /$scripts/configure-install-iso
 }
 
 function pack_iso ()
 {
 echo "+++ PACKING ISO"
-/usr/bin/uck-remaster-remove-win32-files $remasterdir
+uck-remaster-remove-win32-files $remasterdir
 rm -r $remasterdir/remaster-root/$scripts
-/usr/bin/uck-remaster-pack-initrd $remasterdir
-/usr/bin/uck-remaster-pack-rootfs $remasterdir #[-c|--clean-desktop-manifest]
+uck-remaster-pack-initrd $remasterdir
+uck-remaster-pack-rootfs $remasterdir #[-c|--clean-desktop-manifest]
 #cp -fv $isoseed $remasterdir/remaster-iso/preseed/
 #cp -fv $isocfg $remasterdir/remaster-iso/isolinux/txt.cfg
-/usr/bin/uck-remaster-pack-iso $isofilename $remasterdir --generate-md5 --arch=$isoarch --description=$name
-#/usr/bin/uck-remaster-clean-all $remasterdir
+uck-remaster-pack-iso $isofilename $remasterdir --generate-md5 --arch=$isoarch --description=$name
+#uck-remaster-clean-all $remasterdir
 cp -v $remasterdir/remaster-new-files/$name-$unixtime.iso.md5 /iso/nfs/$type/md5/
 }
 
@@ -160,4 +161,4 @@ echo "Waiting 120 seconds for network resources"
 sleep 120
 create_array_of_valid_isos
 update_valid_isos
-/sbin/shutdown -h +1
+shutdown -h +1
