@@ -132,13 +132,13 @@ chmod 444 $remasterdir/remaster-iso/isolinux/isolinux.cfg
 function modify_iso_live ()
 {
 echo "+++ MODIFYING ISO"
-/usr/bin/uck-remaster-chroot-rootfs $remasterdir $scriptpath/$scripts/configure-live-iso
+/usr/bin/uck-remaster-chroot-rootfs $remasterdir /$scripts/configure-live-iso
 }
 
 function modify_iso_install ()
 {
 echo "+++ MODIFYING ISO"
-/usr/bin/uck-remaster-chroot-rootfs $remasterdir $scriptpath/$scripts/configure-install-iso
+/usr/bin/uck-remaster-chroot-rootfs $remasterdir /$scripts/configure-install-iso
 }
 
 function pack_iso ()
