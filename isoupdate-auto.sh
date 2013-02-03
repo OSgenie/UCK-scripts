@@ -1,6 +1,6 @@
 #!/bin/bash
-# kirtley wienbroer
-# kirtley@osgenie.com
+PATH=/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin
+HOME=/root/
 folderpath=/iso/downloads
 # updating server architecture
 server_arch=$(dpkg --print-architecture)
