@@ -1,6 +1,7 @@
 #!/bin/bash
-# kirtley wienbroer
-# kirtley@osgenie.com
+[ -r /root/.bashrc ] && . /root/.bashrc
+[ -r /root/.profile ] && . /root/.profile
+exec "$@"
 folderpath=/iso/downloads
 # updating server architecture
 server_arch=$(dpkg --print-architecture)
