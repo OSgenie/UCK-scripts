@@ -161,4 +161,4 @@ echo "Waiting 120 seconds for network resources"
 sleep 120
 create_array_of_valid_isos
 update_valid_isos
-shutdown -h now
+/sbin/shutdown -h +1
