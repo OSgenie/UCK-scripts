@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "+++ CONFIGURING LIVE ISO"
 ./chroot/apt-cacher-apt-get-update
 ./chroot/apt-get-dist-upgrade
 ./chroot/install-ubuntu-restricted-extras
