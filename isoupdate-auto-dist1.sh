@@ -21,7 +21,7 @@ function import_list_of_valid_isos ()
 {
 list=()
 list=(${list[@]}
-cat < $folderpath/updatelists/$server_release-$server_arch
+$(cat < $folderpath/updatelists/$server_release-$server_arch)
 )
 }
 function update_valid_isos ()
