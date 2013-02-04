@@ -24,6 +24,7 @@ list=(${list[@]}
 $(cat < $folderpath/updatelists/$server_release-$server_arch)
 )
 }
+
 function update_valid_isos ()
 {
 for (( i=0;i<${#list[@]};i++)); do
@@ -67,9 +68,9 @@ done
 function set_iso_arch ()
 {
 # valid options are #x86,x86_64,ia64,ppc
-if [ $os_arch = "i386" ]; then
+if [ $os_arch == 'i386' ]; then
     isoarch=x86
-elif [ $os_arch = "amd64" ]; then
+elif [ $os_arch == 'amd64' ]; then
 isoarch=x86_64
 fi
 }
