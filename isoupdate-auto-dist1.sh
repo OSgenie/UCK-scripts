@@ -20,9 +20,7 @@ fi
 function import_list_of_valid_isos ()
 {
 list=()
-list=(${list[@]}
-$(cat < $folderpath/updatelists/$server_release-$server_arch)
-)
+list=(${list[@]} $(cat < $folderpath/updatelists/$server_release-$server_arch))
 }
 
 function update_valid_isos ()
@@ -32,7 +30,7 @@ for (( i=0;i<${#list[@]};i++)); do
     distro=${list[$i]}
     iso=$folderpath/$distro
     unixtime=(`date +%s`)
-ls -l $iso
+echo $iso   
 #    update_iso
 done
 }
@@ -71,7 +69,7 @@ function set_iso_arch ()
 if [ $server_arch == 'i386' ]; then
     isoarch=x86
 elif [ $server_arch == 'amd64' ]; then
-isoarch=x86_64
+    isoarch=x86_64
 fi
 }
 
