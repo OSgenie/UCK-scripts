@@ -30,8 +30,7 @@ for (( i=0;i<${#list[@]};i++)); do
     distro=${list[$i]}
     iso=$folderpath/$distro
     unixtime=(`date +%s`)
-echo $iso   
-#    update_iso
+    update_iso
 done
 }
 
@@ -139,7 +138,7 @@ cp -v $remasterdir/remaster-new-files/$name-$unixtime.iso.md5 /iso/nfs/$type/md5
 # call functions
 check_for_sudo
 echo "Waiting 120 seconds for network resources"
-#sleep 120
+sleep 120
 import_list_of_valid_isos
 update_valid_isos
-#shutdown -h +1
+shutdown -h +1
