@@ -1,5 +1,0 @@
-#!/bin/bash
-echo "Apt-get Update"
-export http_proxy=http://192.168.11.10:3142
-rm -f /target/etc/apt/sources.list.d/dvd.list
-apt-get update -qq

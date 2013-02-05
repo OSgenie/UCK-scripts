@@ -1,8 +1,0 @@
-#!/bin/bash
-echo "+++ CONFIGURING LIVE ISO"
-./chroot/apt-cacher-apt-get-update
-./chroot/apt-get-dist-upgrade
-./chroot/install-ubuntu-restricted-extras
-./chroot/enable-network-manager
-./chroot/install-oem-config
-./chroot/post-apt-get-dist-upgrade-cleanup
