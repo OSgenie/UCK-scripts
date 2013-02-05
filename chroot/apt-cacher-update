@@ -1,0 +1,8 @@
+#!/bin/bash
+apt_cacher=192.168.11.10:3142
+echo "Apt-get Update"
+cat > /etc/apt/apt.conf << EOM
+Acquire::http { Proxy "$apt_cacher"; };
+EOM
+rm -f /target/etc/apt/sources.list.d/dvd.list
+apt-get update -qq

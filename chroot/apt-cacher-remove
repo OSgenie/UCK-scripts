@@ -1,0 +1,3 @@
+#!/bin/bash
+rm /etc/apt/apt.conf
+apt-get update -qq
