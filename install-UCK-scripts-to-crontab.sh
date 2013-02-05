@@ -21,7 +21,7 @@ function configure_crontab ()
 {
 mkdir /var/log/update-isos
 echo "# m h  dom mon dow   command" | crontab -
-crontab -l | { cat; echo "@reboot /usr/local/bin/update-isos  > /var/log/update-isos/`date +%F`.log"; } | crontab -
+crontab -l | { cat; echo '@reboot /usr/local/bin/update-isos  > /var/log/update-isos/"`date +%F`".log'; } | crontab -
 }
 
 check_for_sudo
