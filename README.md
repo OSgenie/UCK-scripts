@@ -4,7 +4,7 @@ UCK-scripts
 ## Written to be used on Virtual Machines on the OSgenie ISO update server
 https://github.com/OSgenie/ISO-update-server
 
-## A collection of scripts for customizing Ubuntu based LiveCD isos as a cron job
+## A collection of scripts for customizing Ubuntu based LiveCD isos
 Scripts consist of two categories
     1. Scripts for extracting and packaging isos
     2. Scripts to be run inside the chroot environment to customize an iso
