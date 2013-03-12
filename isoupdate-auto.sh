@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 PATH=/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin
 HOME=/root/
 folderpath=/iso/downloads
