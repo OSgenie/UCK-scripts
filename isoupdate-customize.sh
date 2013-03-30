@@ -20,6 +20,14 @@ if [ $UID != 0 ]; then
 fi
 }
 
+function name_iso_suffix ()
+{
+read -p "What should this iso modification be named? (Leave blank for timestamp) " iso_suffix
+if [ -z "$iso_suffix" ]; then
+    iso_suffix=$unixtime
+fi
+}
+
 function create_array_of_valid_isos ()
 {
 array=$( ls $folderpath/ )
@@ -92,7 +100,7 @@ extension=${fullname##*.}
 name=$(basename $iso .$extension)
 remasterdir=/work/$type/$name
 installdir=/iso/nfs/$type
-isofilename="$installdir/$name-$unixtime.iso"
+isofilename="$installdir/$name-$iso_suffix.iso"
 #isoseed=/home/kirtley/Dropbox/Scripts/config_files/auto.seed
 #isocfg=/home/kirtley/Dropbox/Scripts/config_files/txt.cfg
 }
@@ -145,7 +153,7 @@ uck-remaster-pack-rootfs $remasterdir #[-c|--clean-desktop-manifest]
 #cp -fv $isocfg $remasterdir/remaster-iso/isolinux/txt.cfg
 uck-remaster-pack-iso $isofilename $remasterdir --generate-md5 --arch=$isoarch --description=$name
 #uck-remaster-clean-all $remasterdir
-cp -v $remasterdir/remaster-new-files/$name-$unixtime.iso.md5 /iso/nfs/$type/md5/
+cp -v $remasterdir/remaster-new-files/$name-$iso_suffix.iso.md5 /iso/nfs/$type/md5/
 }
 
 check_for_sudo
