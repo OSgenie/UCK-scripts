@@ -157,6 +157,7 @@ cp -v $remasterdir/remaster-new-files/$name-$iso_suffix.iso.md5 /iso/nfs/$type/m
 }
 
 check_for_sudo
+name_iso_suffix
 create_array_of_valid_isos
 user_menu
 set_iso_arch
