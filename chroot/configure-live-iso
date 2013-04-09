@@ -1,9 +1,10 @@
 #!/bin/bash
+# Disabling scripts for testing.
 echo "+++ CONFIGURING LIVE ISO"
 ./chroot/apt-cacher-update
 ./chroot/apt-get-dist-upgrade
-./chroot/install-ubuntu-restricted-extras
-./chroot/enable-network-manager
-./chroot/clean-desktop-for-live
+#./chroot/install-ubuntu-restricted-extras
+#./chroot/enable-network-manager
+#./chroot/clean-desktop-for-live
 ./chroot/post-apt-get-dist-upgrade-cleanup
 ./chroot/apt-cacher-remove
