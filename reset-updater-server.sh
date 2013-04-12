@@ -6,3 +6,4 @@ sudo rm -r /work/install/*
 cd UCK-scripts/
 git pull
 sudo ./install-UCK-scripts-to-crontab.sh
+#sudo shutdown -h
